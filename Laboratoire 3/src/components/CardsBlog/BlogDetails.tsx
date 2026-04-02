@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react'
 import blogImage from '../../assets/image_blog.jpg'
+import CommentList from '../Comments/CommentList'
+import AddComment from '../Comments/AddComment'
+
 
 interface ArticleDetails {
   id: string;
@@ -14,8 +17,13 @@ interface BlogDetailsProps {
 }
 
 export default function BlogDetails({ id }: BlogDetailsProps) {
+  
   const [article, setArticle] = useState<ArticleDetails | null>(null);
   const [erreur, setErreur] = useState<string | null>(null);
+  const [nouveauxCommentaires, setNouveauxCommentaires] = useState<any[]>([]);
+  const ajouterCommentaire = (commentaire: any) => {
+    setNouveauxCommentaires((prev) => [...prev, commentaire]);
+  };
 
   useEffect(() => {
     fetch("http://localhost:3000/publications")
@@ -58,6 +66,8 @@ export default function BlogDetails({ id }: BlogDetailsProps) {
         <p className="mt-4 text-muted">
           {article.auteur} — {article.datePublication}
         </p>
+        <CommentList blogId={id} nouveauxCommentaires={nouveauxCommentaires} />
+        <AddComment blogId={id} onAdd={ajouterCommentaire} />
       </div>
     </div>
   );

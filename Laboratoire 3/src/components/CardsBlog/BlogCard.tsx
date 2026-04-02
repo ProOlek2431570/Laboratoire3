@@ -8,6 +8,9 @@ interface BlogCardProps {
   }
   
 export default function BlogCard({ id, titre, description, image, date, auteur }: BlogCardProps) {
+    const goToDetails = (id: number) => {
+        window.location.href = `/blog?id=${id}`;
+      };
     return (
         <article className="card h-100 border-dark border-2 rounded-4 shadow-sm overflow-hidden">
         <div className="bg-black d-flex justify-content-center align-items-center" style={{height: "200px"}}>
@@ -27,10 +30,8 @@ export default function BlogCard({ id, titre, description, image, date, auteur }
             </small>
         </div>
         <div className="card-body text-center">
-        <a href={`pageBlog.html?id=${id}`} className="btn btn-primary">
-              Lire la suite
-          </a>
-      </div>
+            <button onClick={() => goToDetails(id)} className="btn btn-primary"> Lire la suite </button>
+        </div>
     </article>
     );
 }

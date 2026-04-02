@@ -1,17 +1,12 @@
-import BlogDetails from "./components/CardsBlog/BlogDetails";
-import BlogList from "./components/CardsBlog/BlogList";
 import Footer from "./components/footer";
 import Header from "./components/header";
+import Blog from "./components/CardsBlog/Blog";
 
-const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
 
 export default function App() {
   return <>
   <Header />
-  {id ? <BlogDetails id={id} />
-    :<BlogList />
-  }
+  <Blog />
   <Footer />
   </>
       
